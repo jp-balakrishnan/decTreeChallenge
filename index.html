@@ -113,7 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>“The most important thing in communication is hearing what isn’t said.” - Peter Drucker</p>
 </blockquote>
 <p><strong>The Core Problem:</strong> Decision trees are often praised for their interpretability and ability to handle both numerical and categorical variables. But what happens when we encode categorical variables as numbers? How does this affect our understanding of feature importance?</p>
-<p><strong>What is Feature Importance?</strong> In decision trees, feature importance measures how much each variable contributes to reducing impurity (or improving prediction accuracy) across all splits in the tree. It’s a key metric for understanding which variables matter most for your predictions.</p>
 </section>
 <section id="the-ames-housing-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="the-ames-housing-dataset">The Ames Housing Dataset 🏠</h2>
@@ -127,39 +126,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>Model built with 8 terminal nodes</code></pre>
 </div>
-</div>
-<div id="cell-visualize-tree-python" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/visualize-tree-python-output-1.png" id="visualize-tree-python" width="942" height="566" class="figure-img"></p>
+<p><img src="index_files/figure-html/load-and-model-python-output-2.png" id="load-and-model-python-1" width="942" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
-</div>
-<div id="cell-importance-plot-python" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/importance-plot-python-output-1.png" id="importance-plot-python" width="758" height="470" class="figure-img"></p>
+<p><img src="index_files/figure-html/load-and-model-python-output-3.png" id="load-and-model-python-2" width="758" height="470" class="figure-img"></p>
 </figure>
 </div>
 </div>
-</div>
-<div id="cell-visualize-tree-cat-python" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/visualize-tree-cat-python-output-1.png" id="visualize-tree-cat-python" width="938" height="566" class="figure-img"></p>
+<p><img src="index_files/figure-html/load-and-model-python-output-4.png" id="load-and-model-python-3" width="938" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
-</div>
-<div id="cell-importance-plot-cat-python" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/importance-plot-cat-python-output-1.png" id="importance-plot-cat-python" width="757" height="470" class="figure-img"></p>
+<p><img src="index_files/figure-html/load-and-model-python-output-5.png" id="load-and-model-python-4" width="757" height="470" class="figure-img"></p>
 </figure>
 </div>
 </div>

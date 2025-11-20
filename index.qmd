@@ -21,8 +21,6 @@ execute:
 
 **The Core Problem:** Decision trees are often praised for their interpretability and ability to handle both numerical and categorical variables. But what happens when we encode categorical variables as numbers? How does this affect our understanding of feature importance?
 
-**What is Feature Importance?** In decision trees, feature importance measures how much each variable contributes to reducing impurity (or improving prediction accuracy) across all splits in the tree. It's a key metric for understanding which variables matter most for your predictions.
-
 ## The Ames Housing Dataset 🏠
 
 We are analyzing the Ames Housing dataset which contains detailed information about residential properties sold in Ames, Iowa from 2006 to 2010. This dataset is perfect for our analysis because it contains a categorical variable (like zip code) and numerical variables (like square footage, year built, number of bedrooms).
@@ -68,14 +66,6 @@ tree_model = DecisionTreeRegressor(max_depth=3,
 tree_model.fit(X_train, y_train)
 
 print(f"Model built with {tree_model.get_n_leaves()} terminal nodes")
-```
-
-
-```{python}
-#| label: visualize-tree-python
-#| echo: false
-#| fig-width: 10
-#| fig-height: 6
 
 # Visualize tree
 plt.figure(figsize=(10, 6))
@@ -88,12 +78,6 @@ plot_tree(tree_model,
 plt.title("Decision Tree (zipCode as Numerical)")
 plt.tight_layout()
 plt.show()
-```
-
-
-```{python}
-#| label: feature-importance-python
-#| echo: false
 
 # Extract and display feature importance
 importance_df = pd.DataFrame({
@@ -106,13 +90,6 @@ importance_df['Importance_Percent'] = (importance_df['Importance'] * 100).round(
 # Check zipCode ranking
 zipcode_rank = importance_df[importance_df['Feature'] == 'zipCode'].index[0] + 1
 zipcode_importance = importance_df[importance_df['Feature'] == 'zipCode']['Importance_Percent'].iloc[0]
-```
-
-```{python}
-#| label: importance-plot-python
-#| echo: false
-#| fig-width: 8
-#| fig-height: 5
 
 # Plot feature importance
 plt.figure(figsize=(8, 5))
@@ -124,15 +101,7 @@ plt.title('Feature Importance (zipCode as Numerical)')
 plt.gca().invert_yaxis()
 plt.tight_layout()
 plt.show()
-```
 
-
-
-```{python}
-#| label: categorical-python
-#| echo: false
-#| include: false
-# One-hot encode zipCode
 import pandas as pd
 
 # Create one-hot encoded zipCode
@@ -164,14 +133,7 @@ zipcode_features = [col for col in X_train_cat.columns if col.startswith('zipCod
 zipcode_importance = importance_cat_df[importance_cat_df['Feature'].isin(zipcode_features)]['Importance'].sum()
 total_importance = importance_cat_df['Importance'].sum()
 zipcode_percent = (zipcode_importance / total_importance * 100).round(2)
-```
 
-
-```{python}
-#| label: visualize-tree-cat-python
-#| echo: false
-#| fig-width: 10
-#| fig-height: 6
 
 # Visualize tree with one-hot encoded zipCode
 plt.figure(figsize=(10, 6))
@@ -184,14 +146,6 @@ plot_tree(tree_model_cat,
 plt.title("Decision Tree (zipCode One-Hot Encoded)")
 plt.tight_layout()
 plt.show()
-```
-
-
-```{python}
-#| label: importance-plot-cat-python
-#| echo: false
-#| fig-width: 8
-#| fig-height: 5
 
 # Plot feature importance for categorical zipCode
 plt.figure(figsize=(8, 5))
