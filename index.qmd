@@ -31,7 +31,6 @@ We are analyzing the Ames Housing dataset which contains detailed information ab
 
 **The Issue:** Zip codes (50010, 50011, 50012, 50013) are categorical variables representing discrete geographic areas, i.e. neighborhoods. When treated as numerical, the tree might split on "zipCode > 50012.5" - which has no meaningful interpretation for house prices.  Zip codes are non-ordinal categorical variables meaning they have no inherent order that aids house price prediction (i.e. zip code 99999 is not the priceiest zip code).
 
-
 ```{python}
 #| label: load-and-model-python
 #| echo: false
@@ -176,7 +175,7 @@ plt.show()
 
 **How should zip code be modelled, and is it ordinal or non-ordinal?**
 
-Zip codes should unequivocally be modelled as **categorical variables**, not numerical. Furthermore, zip codes are **non-ordinal categorical variables**.
+Zip codes should unequivocally be modelled as **categorical variables**, not numerical. Furthermore, zip codes are **non-ordinal categorical variables**. Zip codes are not ordinal because there is no inherent order to the zip codes.
 
 **Why Categorical?** Zip codes represent discrete geographic areas—neighborhoods, districts, or regions—not quantities that can be meaningfully added, subtracted, or compared on a numerical scale. While zip codes happen to be represented by numbers (like 50010, 50011, 50012), these numbers are merely labels. The numerical value 50013 is not "greater than" 50012 in any way that relates to house prices, neighborhood quality, or any meaningful real estate characteristic.
 
@@ -235,7 +234,7 @@ From the official scikit-learn documentation at https://scikit-learn.org/stable/
 
 ---
 
-### Question 3: Better Categorical Handling in Python
+### Question 3: Are There Any Suggestions for Implementing Decision Trees in Python With Proper Categorical Handling?
 
 **Are there alternatives to one-hot encoding for decision trees in Python?**
 

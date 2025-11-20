@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="question-1-numerical-vs-categorical-encoding" class="level3">
 <h3 class="anchored" data-anchor-id="question-1-numerical-vs-categorical-encoding">Question 1: Numerical vs Categorical Encoding</h3>
 <p><strong>How should zip code be modelled, and is it ordinal or non-ordinal?</strong></p>
-<p>Zip codes should unequivocally be modelled as <strong>categorical variables</strong>, not numerical. Furthermore, zip codes are <strong>non-ordinal categorical variables</strong>.</p>
+<p>Zip codes should unequivocally be modelled as <strong>categorical variables</strong>, not numerical. Furthermore, zip codes are <strong>non-ordinal categorical variables</strong>. Zip codes are not ordinal because there is no inherent order to the zip codes.</p>
 <p><strong>Why Categorical?</strong> Zip codes represent discrete geographic areas—neighborhoods, districts, or regions—not quantities that can be meaningfully added, subtracted, or compared on a numerical scale. While zip codes happen to be represented by numbers (like 50010, 50011, 50012), these numbers are merely labels. The numerical value 50013 is not “greater than” 50012 in any way that relates to house prices, neighborhood quality, or any meaningful real estate characteristic.</p>
 <p><strong>Why Non-Ordinal?</strong> Ordinal categorical variables have a meaningful order (like education levels: high school &lt; bachelor’s &lt; master’s &lt; PhD). Non-ordinal categorical variables have no inherent ordering that aids prediction. Zip code 99999 is not inherently more expensive than zip code 10001—the relationship between zip codes and house prices depends entirely on the specific geographic and economic characteristics of each area, not on the numerical value of the zip code itself.</p>
 <p><strong>The Real-World Impact:</strong> When we treat zip codes as numerical variables, decision trees create splits like “zipCode &gt; 50012.5”, which has no meaningful interpretation. This leads to zip codes appearing unimportant in feature importance rankings, even though location is typically one of the most critical factors in real estate pricing. The analysis in this document demonstrates this exact problem: when zipCode is treated numerically, it receives minimal importance, but when properly encoded as categorical (via one-hot encoding), the combined zipCode features can capture meaningful geographic patterns.</p>
@@ -216,8 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>The Trade-off:</strong> Python’s approach requires more preprocessing and can lead to less optimal models, but it offers greater flexibility in the broader machine learning ecosystem. However, for decision trees specifically, R’s native categorical handling is superior.</p>
 <hr>
 </section>
-<section id="question-3-better-categorical-handling-in-python" class="level3">
-<h3 class="anchored" data-anchor-id="question-3-better-categorical-handling-in-python">Question 3: Better Categorical Handling in Python</h3>
+<section id="question-3-are-there-any-suggestions-for-implementing-decision-trees-in-python-with-proper-categorical-handling" class="level3">
+<h3 class="anchored" data-anchor-id="question-3-are-there-any-suggestions-for-implementing-decision-trees-in-python-with-proper-categorical-handling">Question 3: Are There Any Suggestions for Implementing Decision Trees in Python With Proper Categorical Handling?</h3>
 <p><strong>Are there alternatives to one-hot encoding for decision trees in Python?</strong></p>
 <p>Yes, there are several modern alternatives that handle categorical variables more effectively than traditional one-hot encoding with sklearn’s DecisionTreeRegressor.</p>
 <p><strong>LightGBM: Native Categorical Support</strong></p>
