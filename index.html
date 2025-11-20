@@ -114,22 +114,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p><strong>The Core Problem:</strong> Decision trees are often praised for their interpretability and ability to handle both numerical and categorical variables. But what happens when we encode categorical variables as numbers? How does this affect our understanding of feature importance?</p>
 <p><strong>What is Feature Importance?</strong> In decision trees, feature importance measures how much each variable contributes to reducing impurity (or improving prediction accuracy) across all splits in the tree. It’s a key metric for understanding which variables matter most for your predictions.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>🎯 The Key Insight: Encoding Matters for Interpretability
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>The problem:</strong> When we encode categorical variables as numerical values (like 1, 2, 3, 4…), decision trees treat them as if they have a meaningful numerical order. This can completely distort our analysis.</p>
-<p><strong>The Real-World Context:</strong> In real estate, we know that neighborhood quality, house style, and other categorical factors are crucial for predicting home prices. But if we encode these as numbers, we might get misleading insights about which features actually matter most.</p>
-<p><strong>The Devastating Reality:</strong> Even sophisticated machine learning models can give us completely wrong insights about feature importance if we don’t properly encode our variables. A categorical variable that should be among the most important might appear irrelevant, while a numerical variable might appear artificially important.</p>
-</div>
-</div>
-<p>Let’s assume we want to predict house prices and understand which features matter most. The key question is: <strong>How does encoding categorical variables as numbers affect our understanding of feature importance?</strong></p>
 </section>
 <section id="the-ames-housing-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="the-ames-housing-dataset">The Ames Housing Dataset 🏠</h2>
@@ -139,25 +123,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="the-problem-zipcode-as-numerical-vs-categorical">The Problem: ZipCode as Numerical vs Categorical</h2>
 <p><strong>Key Question:</strong> What happens when we treat zipCode as a numerical variable in a decision tree? How does this affect feature importance interpretation?</p>
 <p><strong>The Issue:</strong> Zip codes (50010, 50011, 50012, 50013) are categorical variables representing discrete geographic areas, i.e.&nbsp;neighborhoods. When treated as numerical, the tree might split on “zipCode &gt; 50012.5” - which has no meaningful interpretation for house prices. Zip codes are non-ordinal categorical variables meaning they have no inherent order that aids house price prediction (i.e.&nbsp;zip code 99999 is not the priceiest zip code).</p>
-<section id="python" class="level3">
-<h3 class="anchored" data-anchor-id="python">Python</h3>
 <div id="load-and-model-python" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-stdout">
 <pre><code>Model built with 8 terminal nodes</code></pre>
 </div>
 </div>
 <div id="cell-visualize-tree-python" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize tree</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plot_tree(tree_model, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>          feature_names<span class="op">=</span>X_train.columns,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>          filled<span class="op">=</span><span class="va">True</span>, </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>          rounded<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>          max_depth<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Decision Tree (zipCode as Numerical)"</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -176,17 +147,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="cell-visualize-tree-cat-python" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize tree with one-hot encoded zipCode</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plot_tree(tree_model_cat, </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>          feature_names<span class="op">=</span>X_train_cat.columns,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>          filled<span class="op">=</span><span class="va">True</span>, </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          rounded<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          fontsize<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>          max_depth<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Decision Tree (zipCode One-Hot Encoded)"</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -204,7 +164,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section>
 </section>
 <section id="discussion-questions-for-challenge" class="level2">
 <h2 class="anchored" data-anchor-id="discussion-questions-for-challenge">Discussion Questions for Challenge</h2>
@@ -277,12 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p><strong>Key Advantages:</strong> - <strong>Native categorical handling:</strong> Simply specify which features are categorical, and LightGBM handles them internally - <strong>Optimal categorical splits:</strong> Similar to R’s rpart, LightGBM can find optimal groupings of categories - <strong>Better performance:</strong> Often produces better models with less preprocessing - <strong>Efficiency:</strong> More memory-efficient than one-hot encoding, especially for high-cardinality categorical variables</p>
 <p><strong>Example Usage:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> lightgbm <span class="im">as</span> lgb</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify categorical features</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>categorical_features <span class="op">=</span> [<span class="st">'zipCode'</span>]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># LightGBM handles them natively</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> lgb.LGBMRegressor()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train, categorical_feature<span class="op">=</span>categorical_features)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> lightgbm <span class="im">as</span> lgb</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify categorical features</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>categorical_features <span class="op">=</span> [<span class="st">'zipCode'</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># LightGBM handles them natively</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> lgb.LGBMRegressor()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train, categorical_feature<span class="op">=</span>categorical_features)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>CatBoost: Another Strong Alternative</strong></p>
 <p>Yandex’s CatBoost is another gradient boosting library specifically designed to handle categorical features effectively. According to CatBoost documentation:</p>
 <blockquote class="blockquote">

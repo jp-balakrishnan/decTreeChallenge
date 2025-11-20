@@ -23,19 +23,6 @@ execute:
 
 **What is Feature Importance?** In decision trees, feature importance measures how much each variable contributes to reducing impurity (or improving prediction accuracy) across all splits in the tree. It's a key metric for understanding which variables matter most for your predictions.
 
-::: {.callout-important}
-## 🎯 The Key Insight: Encoding Matters for Interpretability
-
-**The problem:** When we encode categorical variables as numerical values (like 1, 2, 3, 4...), decision trees treat them as if they have a meaningful numerical order. This can completely distort our analysis.
-
-**The Real-World Context:** In real estate, we know that neighborhood quality, house style, and other categorical factors are crucial for predicting home prices. But if we encode these as numbers, we might get misleading insights about which features actually matter most.
-
-**The Devastating Reality:** Even sophisticated machine learning models can give us completely wrong insights about feature importance if we don't properly encode our variables. A categorical variable that should be among the most important might appear irrelevant, while a numerical variable might appear artificially important.
-
-:::
-
-Let's assume we want to predict house prices and understand which features matter most. The key question is: **How does encoding categorical variables as numbers affect our understanding of feature importance?**
-
 ## The Ames Housing Dataset 🏠
 
 We are analyzing the Ames Housing dataset which contains detailed information about residential properties sold in Ames, Iowa from 2006 to 2010. This dataset is perfect for our analysis because it contains a categorical variable (like zip code) and numerical variables (like square footage, year built, number of bedrooms).
@@ -46,8 +33,6 @@ We are analyzing the Ames Housing dataset which contains detailed information ab
 
 **The Issue:** Zip codes (50010, 50011, 50012, 50013) are categorical variables representing discrete geographic areas, i.e. neighborhoods. When treated as numerical, the tree might split on "zipCode > 50012.5" - which has no meaningful interpretation for house prices.  Zip codes are non-ordinal categorical variables meaning they have no inherent order that aids house price prediction (i.e. zip code 99999 is not the priceiest zip code).
 
-
-### Python
 
 ```{python}
 #| label: load-and-model-python
@@ -88,7 +73,7 @@ print(f"Model built with {tree_model.get_n_leaves()} terminal nodes")
 
 ```{python}
 #| label: visualize-tree-python
-#| echo: true
+#| echo: false
 #| fig-width: 10
 #| fig-height: 6
 
@@ -145,7 +130,7 @@ plt.show()
 
 ```{python}
 #| label: categorical-python
-#| echo: true
+#| echo: false
 #| include: false
 # One-hot encode zipCode
 import pandas as pd
@@ -184,7 +169,7 @@ zipcode_percent = (zipcode_importance / total_importance * 100).round(2)
 
 ```{python}
 #| label: visualize-tree-cat-python
-#| echo: true
+#| echo: false
 #| fig-width: 10
 #| fig-height: 6
 
