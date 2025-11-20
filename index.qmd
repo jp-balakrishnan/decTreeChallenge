@@ -67,16 +67,16 @@ tree_model.fit(X_train, y_train)
 print(f"Model built with {tree_model.get_n_leaves()} terminal nodes")
 
 # Visualize tree
-plt.figure(figsize=(10, 6))
-plot_tree(tree_model, 
-          feature_names=X_train.columns,
-          filled=True, 
-          rounded=True,
-          fontsize=10,
-          max_depth=3)
-plt.title("Decision Tree (zipCode as Numerical)")
-plt.tight_layout()
-plt.show()
+# plt.figure(figsize=(10, 6))
+# plot_tree(tree_model, 
+#           feature_names=X_train.columns,
+#           filled=True, 
+#           rounded=True,
+#           fontsize=10,
+#           max_depth=3)
+# plt.title("Decision Tree (zipCode as Numerical)")
+# plt.tight_layout()
+#plt.show()
 
 # Extract and display feature importance
 importance_df = pd.DataFrame({
@@ -91,15 +91,15 @@ zipcode_rank = importance_df[importance_df['Feature'] == 'zipCode'].index[0] + 1
 zipcode_importance = importance_df[importance_df['Feature'] == 'zipCode']['Importance_Percent'].iloc[0]
 
 # Plot feature importance
-plt.figure(figsize=(8, 5))
-plt.barh(range(len(importance_df)), importance_df['Importance'], 
-         color='steelblue', alpha=0.7)
-plt.yticks(range(len(importance_df)), importance_df['Feature'])
-plt.xlabel('Importance Score')
-plt.title('Feature Importance (zipCode as Numerical)')
-plt.gca().invert_yaxis()
-plt.tight_layout()
-plt.show()
+# plt.figure(figsize=(8, 5))
+# plt.barh(range(len(importance_df)), importance_df['Importance'], 
+#          color='steelblue', alpha=0.7)
+# plt.yticks(range(len(importance_df)), importance_df['Feature'])
+# plt.xlabel('Importance Score')
+# plt.title('Feature Importance (zipCode as Numerical)')
+# plt.gca().invert_yaxis()
+# plt.tight_layout()
+#plt.show()
 
 import pandas as pd
 
@@ -135,27 +135,27 @@ zipcode_percent = (zipcode_importance / total_importance * 100).round(2)
 
 
 # Visualize tree with one-hot encoded zipCode
-plt.figure(figsize=(10, 6))
-plot_tree(tree_model_cat, 
-          feature_names=X_train_cat.columns,
-          filled=True, 
-          rounded=True,
-          fontsize=8,
-          max_depth=4)
-plt.title("Decision Tree (zipCode One-Hot Encoded)")
-plt.tight_layout()
-plt.show()
+# plt.figure(figsize=(10, 6))
+# plot_tree(tree_model_cat, 
+#           feature_names=X_train_cat.columns,
+#           filled=True, 
+#           rounded=True,
+#           fontsize=8,
+#           max_depth=4)
+# plt.title("Decision Tree (zipCode One-Hot Encoded)")
+# plt.tight_layout()
+#plt.show()
 
 # Plot feature importance for categorical zipCode
-plt.figure(figsize=(8, 5))
-plt.barh(range(len(importance_cat_df)), importance_cat_df['Importance'], 
-         color='darkgreen', alpha=0.7)
-plt.yticks(range(len(importance_cat_df)), importance_cat_df['Feature'])
-plt.xlabel('Importance Score')
-plt.title('Feature Importance (zipCode One-Hot Encoded)')
-plt.gca().invert_yaxis()
-plt.tight_layout()
-plt.show()
+# plt.figure(figsize=(8, 5))
+# plt.barh(range(len(importance_cat_df)), importance_cat_df['Importance'], 
+#          color='darkgreen', alpha=0.7)
+# plt.yticks(range(len(importance_cat_df)), importance_cat_df['Feature'])
+# plt.xlabel('Importance Score')
+# plt.title('Feature Importance (zipCode One-Hot Encoded)')
+# plt.gca().invert_yaxis()
+# plt.tight_layout()
+#plt.show()
 ```
 
 
